@@ -398,12 +398,25 @@ class queue_runner(threading.Thread):
                     return
             else:
                 if my_id:
+                    if isinstance(my_id, str):
+                        my_id = my_id.decode('utf-8', 'replace')
+                    else:
+                        my_id = unicode(my_id)
+                    my_id = my_id.encode('utf-8', 'replace')
+
                     time_of_last_run = time.time()
-                    subprocess.call([
-                        'php',
-                        pathname + '/../nix/tmux/bin/postprocess_new.php',
-                        '' + my_id,
-                    ])
+                    try:
+                        subprocess.call([
+                            'php',
+                            os.path.join(
+                                pathname,
+                                '../nix/tmux/bin/postprocess_new.php',
+                            ),
+                            my_id,
+                        ])
+                    except Exception, e:
+                        error('Error {} while executing postprocess for {}',
+                              e, my_id)
                     time.sleep(.02)
                     self.my_queue.task_done()
 
