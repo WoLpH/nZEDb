@@ -414,7 +414,7 @@ class queue_runner(threading.Thread):
                             ),
                             my_id,
                         ])
-                    except Exception, e:
+                    except Exception as e:
                         error('Error {} while executing postprocess for {}',
                               e, my_id)
                     time.sleep(.02)
