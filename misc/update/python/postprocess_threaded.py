@@ -26,11 +26,11 @@ def printer(color, format, *args, **kwargs):
 
 
 def header(format, *args, **kwargs):
-    printer(bgcolors.HEADER, format, *args, **kwargs)
+    printer(bcolors.HEADER, format, *args, **kwargs)
 
 
 def error(format, *args, **kwargs):
-    printer(bgcolors.ERROR, format, *args, **kwargs)
+    printer(bcolors.ERROR, format, *args, **kwargs)
 
 
 if len(sys.argv) == 1:
